@@ -1,2 +1,2 @@
 ## Algorithms: Design and Analysis / Stanford - Coursera
-Programming Assignments
+Programming Assignments in Python

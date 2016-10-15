@@ -68,10 +68,10 @@ class Graph:
     def __cut(self):
         """return a random cut of Graph g"""
         cut = DisjointSet(len(self.__graph))
-        edges = self.__edges.copy()
+        edges = list(self.__edges)
         while len(cut) > 2:
-            e = random.choice(tuple(edges))
-            edges.discard(e)
+            e = random.choice(edges)
+            edges.remove(e)
             v1, v2 = e
             cut.union(v1, v2)
         # no. of crossed edges
@@ -85,7 +85,8 @@ class Graph:
     def min_cut(self):
         """cut n^2*log(n) times to get min cut"""
         n = len(self.__graph)
-        N = int((n**2) * math.log(n))
+        # N = int((n**2) * math.log(n))
+        N = 1000
         min_cut = self.__cut()
         for _ in range(N):
             cut = self.__cut()

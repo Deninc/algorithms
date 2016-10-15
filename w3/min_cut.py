@@ -58,27 +58,26 @@ class Graph:
         """return set of frozensets of two values (v1, v2)
         where exists an edge connects between v1 and v2
         """
-        edges = set()
+        edges = []
         for v in self.__graph:
             for vi in self.__graph[v]:
-                if frozenset([v, vi]) not in edges:
-                    edges.add(frozenset([v, vi]))
+                if v < vi:
+                    edges.append((v, vi))
         return edges
 
     def __cut(self):
         """return a random cut of Graph g"""
         cut = DisjointSet(len(self.__graph))
-        edges = list(self.__edges)
-        random.shuffle(edges)
+        random.shuffle(self.__edges)
         i = 0
         while len(cut) > 2:
-            e = edges[i]
+            e = self.__edges[i]
             i += 1
             v1, v2 = e
             cut.union(v1, v2)
         # no. of crossed edges
         count = 0
-        for e in edges[i:]:
+        for e in self.__edges[i:]:
             v1, v2 = e
             if cut.root(v1) != cut.root(v2):
                 count += 1
@@ -87,8 +86,7 @@ class Graph:
     def min_cut(self):
         """cut n^2*log(n) times to get min cut"""
         n = len(self.__graph)
-        # N = int((n**2) * math.log(n))
-        N = 1000
+        N = int((n**2) * math.log(n))
         min_cut = self.__cut()
         for _ in range(N):
             cut = self.__cut()

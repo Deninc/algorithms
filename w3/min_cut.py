@@ -69,14 +69,16 @@ class Graph:
         """return a random cut of Graph g"""
         cut = DisjointSet(len(self.__graph))
         edges = list(self.__edges)
+        random.shuffle(edges)
+        i = 0
         while len(cut) > 2:
-            e = random.choice(edges)
-            edges.remove(e)
+            e = edges[i]
+            i += 1
             v1, v2 = e
             cut.union(v1, v2)
         # no. of crossed edges
         count = 0
-        for e in edges:
+        for e in edges[i:]:
             v1, v2 = e
             if cut.root(v1) != cut.root(v2):
                 count += 1

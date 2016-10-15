@@ -107,7 +107,7 @@ def read_graph(filename):
     return res
 
 if  __name__ == "__main__":
-    g = Graph(read_graph("kargerMincut.txt"))
+    g = Graph(read_graph("./w3/test.txt"))
     n = len(g)
     N = int((n**2) * math.log(n))
     min_cut = g.min_cut()

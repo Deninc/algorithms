@@ -2,9 +2,8 @@ import random
 import math
 
 """
-Classes: Graph, UnionFind...
+CLASSES
 """
-
 class DisjointSet():
     """Representation of merged vertices when performing min cut algorithm
     """
@@ -55,10 +54,10 @@ class Graph:
         self.__graph = graph_dict
         self.__edges = self.__generate_edges()
 
-    def __len__(self):
-        return len(self.__graph)
-
     def __generate_edges(self):
+        """return set of frozensets of two values (v1, v2)
+        where exists an edge connects between v1 and v2
+        """
         edges = set()
         for v in self.__graph:
             for vi in self.__graph[v]:
@@ -66,8 +65,8 @@ class Graph:
                     edges.add(frozenset([v, vi]))
         return edges
 
-    def min_cut(self):
-        """return mincut of Graph g"""
+    def __cut(self):
+        """return a random cut of Graph g"""
         cut = DisjointSet(len(self.__graph))
         edges = self.__edges.copy()
         while len(cut) > 2:
@@ -83,6 +82,17 @@ class Graph:
                 count += 1
         return count
 
+    def min_cut(self):
+        """cut n^2*log(n) times to get min cut"""
+        n = len(self.__graph)
+        N = int((n**2) * math.log(n))
+        min_cut = self.__cut()
+        for _ in range(N):
+            cut = self.__cut()
+            if cut < min_cut: min_cut = cut
+        return min_cut
+
+
     def __str__(self):
         res = "Vertices: "
         res += " ".join(map(str, self.__graph.keys()))
@@ -93,7 +103,7 @@ class Graph:
         return res
 
 """
-Read from file
+MAIN
 """
 def read_graph(filename):
     """Read from file return dict"""
@@ -107,11 +117,5 @@ def read_graph(filename):
     return res
 
 if  __name__ == "__main__":
-    g = Graph(read_graph("./w3/test.txt"))
-    n = len(g)
-    N = int((n**2) * math.log(n))
-    min_cut = g.min_cut()
-    for _ in range(N):
-        cut = g.min_cut()
-        if cut < min_cut: min_cut = cut
-    print min_cut
+    g = Graph(read_graph("./w3/kargerMinCut.txt"))
+    print g.min_cut()

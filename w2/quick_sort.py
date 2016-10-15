@@ -61,7 +61,7 @@ def quick_sort(arr, begin=0, end=None, c=None):
     return c
 
 if __name__ == "__main__":
-    with open("QuickSort.txt", "r") as f:
+    with open("./w2/QuickSort.txt", "r") as f:
         arr = f.readlines()
         arr = [int(i) for i in arr]
     c = quick_sort(arr)

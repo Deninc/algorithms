@@ -45,6 +45,7 @@ class DisjointSet():
 
         self.__count -= 1
 
+
 class Graph:
     """Representation of graph for min cut problem
         graph: dict of key: str, value: set of strs adjacencies
@@ -75,7 +76,8 @@ class Graph:
             i += 1
             v1, v2 = e
             cut.union(v1, v2)
-        # no. of crossed edges
+
+        # exercise: no. of crossed edges
         count = 0
         for e in self.__edges[i:]:
             v1, v2 = e
@@ -92,7 +94,6 @@ class Graph:
             cut = self.__cut()
             if cut < min_cut: min_cut = cut
         return min_cut
-
 
     def __str__(self):
         res = "Vertices: "

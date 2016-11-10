@@ -17,9 +17,6 @@ class Graph:
     def add_edge(self, v1, v2):
         self.__graph[v1].append(v2)
 
-    def get_graph(self):
-        return self.__graph
-
     def dfs_stack(self):
         """dfs on graph
         return stack of vertices by finishing time"""
@@ -49,41 +46,69 @@ class Graph:
         self.__graph = new_g
         return new_g
 
-    def dfs_2nd(self, i, marked, scc):
-        marked[i] = 1
-        scc.append(i)
-        for j in self.__graph[i]:
-            if not marked[j]:
-                self.dfs_2nd(j, marked, scc)
+    def dfs_1st(self, v, marked, f):
+        """dfs from node v"""
+        stack = [(v, v), ]
+        # instead of adding all neighbor of i to the stack
+        # we add in the form of an edge (i, j)
+        # before that we add (i, None) to indicate the backtracking
+        # point of the node i -> finished
+        while stack:
+            i, j = stack.pop()
+            if j is None:
+                f.append(i)
+            elif not marked[j]:
+                marked[j] = 1
+                stack.append((j, None))
+                for k in self.__graph[j]:
+                    if not marked[k]:
+                        stack.append((j, k))
 
-    def scc(self):
-        stack = self.dfs_stack()
-        self.reverse()
-        marked = [0] * self.__n
+    def dfs_scc(self, v, marked):
+        """dfs from v (leader)
+        return size of this connected components"""
+        size = 0
+        stack = [v,]
         while stack:
             i = stack.pop()
             if not marked[i]:
-                scc = []
-                self.dfs_2nd(i, marked, scc)
-                print len(scc)
+                marked[i] = 1
+                size += 1
+                for j in self.__graph[i]:
+                    stack.append(j)
+        return size
 
+    def scc(self):
+        print "First dfs"
+        f = [] # finishing time stack
+        marked = [0] * self.__n
+        for v in range(self.__n):
+            if not marked[v]:
+                self.dfs_1st(v, marked, f)
 
-    def __str__(self):
-        res = "Length: {}".format(len(self.__graph))
-        return res
+        assert len(f) == self.__n
+        print "Reversing"
+        self.reverse()
 
+        print "Second dfs"
+        marked = [0] * self.__n
+        sccs_size = []
+        while f:
+            i = f.pop()
+            if not marked[i]:
+                size = self.dfs_scc(i, marked)
+                sccs_size.append(size)
+        print "Result"
 
+        return sorted(sccs_size, reverse=True)[:5]
 
-# def read_graph(filename):
-#     """Read from file return dict"""
-#     res = {}
-#     with open(filename) as f:
-#         lines = f.readlines()
-#         for l in lines:
-#             arr = l.split()
-#             arr = map(int, arr)
-#             res[arr[0]] = arr[1:]
-#     return res
-#
-# if  __name__ == "__main__":
-#     g = Graph(read_graph("./w4/SCC.txt"))
+if  __name__ == "__main__":
+    print "Start reading"
+    g = Graph(875715)
+    with open("./w4/SCC.txt") as f:
+        lines = f.readlines()
+        for l in lines:
+            arr = l.split()
+            g.add_edge(int(arr[0]), int(arr[1]))
+    print "Start processing"
+    print g.scc()

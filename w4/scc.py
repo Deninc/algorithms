@@ -7,7 +7,7 @@ from collections import defaultdict
 
 class Graph:
     """Representation of graph for SCC
-        graph: dict of key: str, value: set of strs adjacencies
+        graph: dict of key: str, value: list of strs adjacencies
     """
     def __init__(self, n, graph=None):
         if graph is None: graph = defaultdict(list)
@@ -15,27 +15,8 @@ class Graph:
         self.__n = n
 
     def add_edge(self, v1, v2):
+        """add an directed edge from v1 to v2"""
         self.__graph[v1].append(v2)
-
-    def dfs_stack(self):
-        """dfs on graph
-        return stack of vertices by finishing time"""
-        def dfs(i):
-            """dfs from node i"""
-            marked[i] = 1
-            for j in self.__graph[i]:
-                if not marked[j]:
-                    dfs(j)
-            stack.append(i)
-
-        stack = []
-        marked = [0] * self.__n
-
-        for i in range(self.__n):
-            if not marked[i]:
-                dfs(i)
-
-        return stack
 
     def reverse(self):
         """Reverse the graph edges"""
@@ -44,7 +25,6 @@ class Graph:
             for j in self.__graph[i]:
                 new_g[j].append(i)
         self.__graph = new_g
-        return new_g
 
     def dfs_1st(self, v, marked, f):
         """dfs from node v"""
@@ -79,6 +59,7 @@ class Graph:
         return size
 
     def scc(self):
+        """the scc Algorithm"""
         print "First dfs"
         f = [] # finishing time stack
         marked = [0] * self.__n
@@ -98,7 +79,7 @@ class Graph:
             if not marked[i]:
                 size = self.dfs_scc(i, marked)
                 sccs_size.append(size)
-        print "Result"
+        print "Return"
 
         return sorted(sccs_size, reverse=True)[:5]
 

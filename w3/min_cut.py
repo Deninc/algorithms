@@ -48,7 +48,7 @@ class DisjointSet():
 
 class Graph:
     """Representation of graph for min cut problem
-        graph: dict of key: str, value: set of strs adjacencies
+        graph: dict of key: vertice, value: list of adjacencies
     """
     def __init__(self, graph_dict=None):
         if graph_dict is None: graph_dict = {}
@@ -56,8 +56,8 @@ class Graph:
         self.__edges = self.__generate_edges()
 
     def __generate_edges(self):
-        """return set of frozensets of two values (v1, v2)
-        where exists an edge connects between v1 and v2
+        """return list of tuple (v1, v2)
+        where exists an edge connects between v1 and v2 (no duplicates)
         """
         edges = []
         for v in self.__graph:

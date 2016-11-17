@@ -7,7 +7,7 @@ from collections import defaultdict
 
 class Graph:
     """Representation of graph for SCC
-        graph: dict of key: str, value: list of strs adjacencies
+        graph: dict of key: vertice, value: list of adjacencies
     """
     def __init__(self, n, graph=None):
         if graph is None: graph = defaultdict(list)

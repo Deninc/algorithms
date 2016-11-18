@@ -17,7 +17,7 @@ test2 = """1 4
 class TestSCC(unittest.TestCase):
 
     def test_scc(self):
-        d = defaultdict(list, {0: [2,3], 1: [0,], 2:[1,], 3:[4,]})
+        d = {0: [2,3], 1: [0,], 2:[1,], 3:[4,]}
         g1 = scc.Graph(5, d)
         self.assertEqual(g1.scc(), [3,1,1])
 

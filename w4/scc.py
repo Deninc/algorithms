@@ -7,11 +7,11 @@ from collections import defaultdict
 
 class Graph:
     """Representation of graph for SCC
-        graph: dict of key: vertice, value: list of adjacencies
+        graph: dict of key: vertex, value: list of adjacencies
     """
     def __init__(self, n, graph=None):
         if graph is None: graph = defaultdict(list)
-        self.__graph = graph
+        self.__graph = defaultdict(list, graph)
         self.__n = n
 
     def add_edge(self, v1, v2):

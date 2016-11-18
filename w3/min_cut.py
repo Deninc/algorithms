@@ -48,7 +48,7 @@ class DisjointSet():
 
 class Graph:
     """Representation of graph for min cut problem
-        graph: dict of key: vertice, value: list of adjacencies
+        graph: dict of key: vertex, value: list of adjacencies
     """
     def __init__(self, graph_dict=None):
         if graph_dict is None: graph_dict = {}

@@ -82,14 +82,14 @@ class Graph:
                         heap.add_vertex(adj, new_dist)
         return dist
 
-if __name__ == "__main__":
-    g = Graph(200)
-    with open("./w5/dijkstraData.txt") as f:
-        lines = f.readlines()
-        for l in lines:
-            arr = l.split("\t")[:-1]    # last element is '\n'
-            for adj in arr[1:]:
-                v, w = adj.split(",")
-                g.add_edge(int(arr[0]), int(v), int(w))
-    dist = g.shortest_path(1)
-    print dist[200]
+# if __name__ == "__main__":
+#     g = Graph(200)
+#     with open("./w5/dijkstraData.txt") as f:
+#         lines = f.readlines()
+#         for l in lines:
+#             arr = l.split("\t")[:-1]    # last element is '\n'
+#             for adj in arr[1:]:
+#                 v, w = adj.split(",")
+#                 g.add_edge(int(arr[0]), int(v), int(w))
+#     dist = g.shortest_path(1)
+#     print dist[200]

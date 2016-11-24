@@ -118,6 +118,6 @@ def read_graph(filename):
             res[arr[0]] = arr[1:]
     return res
 
-if  __name__ == "__main__":
-    g = Graph(read_graph("./w3/kargerMinCut.txt"))
-    print g.min_cut()
+# if  __name__ == "__main__":
+#     g = Graph(read_graph("./w3/kargerMinCut.txt"))
+#     print g.min_cut()

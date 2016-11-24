@@ -83,13 +83,13 @@ class Graph:
 
         return sorted(sccs_size, reverse=True)[:5]
 
-if  __name__ == "__main__":
-    print "Start reading"
-    g = Graph(875715)
-    with open("./w4/SCC.txt") as f:
-        lines = f.readlines()
-        for l in lines:
-            arr = l.split()
-            g.add_edge(int(arr[0]), int(arr[1]))
-    print "Start processing"
-    print g.scc()
+# if  __name__ == "__main__":
+#     print "Start reading"
+#     g = Graph(875715)
+#     with open("./w4/SCC.txt") as f:
+#         lines = f.readlines()
+#         for l in lines:
+#             arr = l.split()
+#             g.add_edge(int(arr[0]), int(arr[1]))
+#     print "Start processing"
+#     print g.scc()

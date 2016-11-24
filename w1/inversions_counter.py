@@ -37,8 +37,8 @@ def sort_and_count(arr):
 def count(arr):
     return sort_and_count(arr)[0]
 
-if __name__ == '__main__':
-    with open("./w1/IntegerArray.txt", "r") as f:
-        arr = f.readlines()
-        arr = [int(i) for i in arr]
-    print "The result is %s" % count(arr)
+# if __name__ == '__main__':
+#     with open("./w1/IntegerArray.txt", "r") as f:
+#         arr = f.readlines()
+#         arr = [int(i) for i in arr]
+#     print "The result is %s" % count(arr)

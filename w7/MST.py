@@ -84,6 +84,14 @@ class Graph:
 
         return overall_cost
 
-if __name__ == "__main__":
-    g = Graph(4, graph={1: [(2,1), (3,2)], 2:[(1,1), (3,3), (4,4)], 3: [(2,3), (4,5)], 4: [(2,4), (3,5)]})
-    print g.mst()
+# if __name__ == "__main__":
+#     with open("w7/edges.txt") as f:
+#         l = f.readlines()
+#
+#     n = int(l[0].split()[0])
+#     g = Graph(n)
+#     for edge in l[1:]:
+#         v1, v2, length = edge.split()
+#         g.add_edge(int(v1), int(v2), int(length))
+#
+#     print g.mst()

@@ -6,8 +6,7 @@ from collections import defaultdict
 import heapq
 
 class Heap:
-    """Min-Heap storing entry information supporting
-    the Dijkstra shortest_path algorithm
+    """Min-Heap with delete function
     """
 
     REMOVED = "<removed vertex>"    # placeholder for removed entry
@@ -49,9 +48,8 @@ class Heap:
         raise KeyError("empty heap")
 
 
-
 class Graph:
-    """Representation of graph for Shortest Path problem
+    """Representation of graph for MST problem
         graph: dict of key: vertex, value: list of tuples (adj, length)
     """
     def __init__(self, n, graph=None):
@@ -63,24 +61,29 @@ class Graph:
         """add an weighted directed edge from v1 to v2"""
         self.__graph[v1].append((v2, length))
 
-    def shortest_path(self, source):
-        """dijkstra shortest_path from source vertex s"""
+    def mst(self):
+        """compute minimum spanning tree"""
         marked = set()
         heap = Heap()
-        heap.add_vertex(source, 0)  # from s to itself
-        dist = defaultdict(int)
-        dist[source] = 0
+        heap.add_vertex(1, 0)   # should be random instead of vertex 1
+        # T = set() # MST: set of edges in tree
+        overall_cost = 0    # cost of all edges in MST
+
         while len(marked) < self.__n:
-            vertex, distance = heap.pop_vertex()    # vertex and shortest dist
+            vertex, distance = heap.pop_vertex()
             marked.add(vertex)
-            dist[vertex] = distance
-            for tup in self.__graph[vertex]:
-                adj, length = tup
+            overall_cost += distance # add the edge length
+            for edge in self.__graph[vertex]:
+                adj, length = edge
                 if adj not in marked:
-                    new_dist = distance + length
                     if heap.contains(adj):
-                        if new_dist < heap.get_weight(adj):
-                            heap.add_vertex(adj, new_dist)
+                        if length < heap.get_weight(adj):
+                            heap.add_vertex(adj, length)
                     else:
-                        heap.add_vertex(adj, new_dist)
-        return dist
+                        heap.add_vertex(adj, length)
+
+        return overall_cost
+
+if __name__ == "__main__":
+    g = Graph(4, graph={1: [(2,1), (3,2)], 2:[(1,1), (3,3), (4,4)], 3: [(2,3), (4,5)], 4: [(2,4), (3,5)]})
+    print g.mst()

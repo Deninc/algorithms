@@ -45,10 +45,11 @@ class DisjointSet():
 class Graph:
     """graph: dict of key: vertex, value: list of tuples (adj, length)
     """
-    def __init__(self, graph_dict=None):
+    def __init__(self, n, graph_dict=None):
         if graph_dict is None: graph_dict = {}
         self.__graph = graph_dict
         self.__edges = self.__generate_edges()
+        self.__n = n
 
     def __generate_edges(self):
         """return list of tuple (v1, v2, length)
@@ -67,7 +68,7 @@ class Graph:
         return the final spacing
         """
         edges = sorted(self.__edges, key=lambda x: x[2])
-        clusters = DisjointSet(len(self.__graph))
+        clusters = DisjointSet(self.__n)
         i = 0
         while len(clusters) > k:
             # find closet pair of points
@@ -84,11 +85,12 @@ class Graph:
 #     with open("w8/clustering1.txt") as f:
 #         l = f.readlines()
 #
+#     n = int(l[0])
 #     for edge in l[1:]:
 #         v1, v2, l = edge.split()
 #         d[int(v1)].append((int(v2), int(l)))
 #
-#     g = Graph(d)
-#     space = g.clustering(4)
-#     assert space == 7, "%s is Incorrect!" % space
+#     g = Graph(n, d)
+#     space = g.clustering(3)
+#     assert space == 3203, "%s is Incorrect!" % space
 #     print "Correct!"

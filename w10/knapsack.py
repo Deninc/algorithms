@@ -17,3 +17,11 @@ def knapsack(v, w, c):
                 table[i][x] = max(table[i-1][x], table[i-1][x-w[i-1]] + v[i-1])
 
     return table[n][c]
+
+if __name__ == "__main__":
+    with open("w10/knapsack_big.txt") as f:
+        c, _ = map(int, next(f).split())
+        items = [map(int, line.split()) for line in f]
+
+    v, w = zip(*items)
+    print knapsack(v, w, c)

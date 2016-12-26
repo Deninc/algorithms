@@ -1,10 +1,13 @@
-## Algorithm Practice Problem
-Algorithms practiced in Python.
+## Algorithm Practice Problems
+Data Structures and Algorithms practiced in Python.
 
 - Week 1: Inversions Counter (through Merge Sort)
 - Week 2: Quick Sort
-- Week 3: Graph Min Cut
-- Week 4: Graph Strong Connected Components
-- Week 5: Graph Shortest Path
-- Week 6: Median Maintenance (with own implementation of Heap)
-- Week 7: Graph Minimum Spanning Tree
+- Week 3: Graph Min Cut (Random Contraction)
+- Week 4: Graph Strong Connected Components (DFS)
+- Week 5: Graph Dijkstra's Shortest Path (with Heap)
+- Week 6: Median Maintenance (with min and max Heaps)
+- Week 7: Graph Prim's Minimum Spanning Tree (Greedy Algorithm)
+- Week 8: Kruskal's Max Space Clustering (Greedy Algorithm)
+- Week 9: Maximum Weight Independence Set (Dynamic Programming)
+- Week 10: Knapsack Problem (Dynamic Programming)

@@ -1,5 +1,5 @@
 import unittest
-from knapsack import knapsack
+from knapsack import knapsack, knapsack_re
 
 class TestKnapsack(unittest.TestCase):
 
@@ -10,7 +10,7 @@ class TestKnapsack(unittest.TestCase):
 
         v = [4, 2, 6, 1, 2]
         w = [12, 1, 4, 1, 2]
-        self.assertEqual(knapsack(v, w, 15), 11)
+        self.assertEqual(knapsack_re(v, w, 15), 11)
 
 if __name__ == "__main__":
     unittest.main()
